@@ -58,6 +58,11 @@ function keyPressed(){
     }
 }
 
+function mouseClicked(){
+    filling = !filling;
+    draw();
+}
+
 function draw_polygon(
     sides,
     offset_angle = HALF_PI
