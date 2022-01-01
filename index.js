@@ -3,11 +3,12 @@ let perimeter = 300;
 let center;
 let colors;
 let min_gons = 3;
-let max_gons = 500;
+let max_gons = 250;
 let stroke_weight_slider = document.querySelector('#stroke-weight-slider');
 let side_length_slider = document.querySelector('#side-length-slider');
 let translation_slider = document.querySelector('#translation-slider');
 let relative_scale_slider = document.querySelector('#scale-slider');
+let max_gons_slider = document.querySelector('#max-gons-slider');
 let filling_checkbox = document.querySelector('#filling-checkbox');
 let scale_type_select = document.querySelector('#scale-type');
 
@@ -30,7 +31,10 @@ function setup(){
         color(255, 0, 128)
     ];
     strokeWeight(stroke_weight_slider.value);
-    stroke_weight_slider.addEventListener('input', update_stroke_weight);
+    stroke_weight_slider.addEventListener('input', event=>{
+        strokeWeight(event.target.value);
+        redraw();
+    });
     side_length_slider.addEventListener('input', event=>{
         side_length = parseInt(side_length_slider.value);
         perimeter = side_length * 3;
@@ -38,6 +42,10 @@ function setup(){
     });
     translation_slider.addEventListener('input', redraw);
     relative_scale_slider.addEventListener('input', redraw);
+    max_gons_slider.addEventListener('input', event=>{
+        max_gons = parseInt(event.target.value);
+        redraw();
+    });
     filling_checkbox.addEventListener('input', redraw);
     scale_type_select.addEventListener('input', redraw);
     noLoop();
@@ -119,6 +127,4 @@ function toggle_filling(){
 }
 
 function update_stroke_weight(){
-    strokeWeight(stroke_weight_slider.value);
-    redraw();
 }
