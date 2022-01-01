@@ -1,5 +1,5 @@
 let side_length = 100;
-let triangle_perimeter = 300;
+let perimeter = 300;
 let center;
 let colors;
 let min_gons = 3;
@@ -33,7 +33,7 @@ function setup(){
     stroke_weight_slider.addEventListener('change', update_stroke_weight);
     side_length_slider.addEventListener('change', event=>{
         side_length = parseInt(side_length_slider.value);
-        triangle_perimeter = side_length * 3;
+        perimeter = side_length * 3;
         redraw();
     });
     translation_slider.addEventListener('change', redraw);
@@ -87,10 +87,12 @@ function draw_polygon(
     for(let i = 0; i < sides; i++){
         let theta = TWO_PI * i / sides + offset_angle;
         let len;
-        if(scale_type_select.value === 'geometric')
-            len = side_length ** (1 - w) * (triangle_perimeter / sides) ** w; // Geometric
-        else if(scale_type_select.value === 'arithmatic')
-            len = side_length * (1 - w) + (triangle_perimeter / sides) * w; // Arithmetic
+        if(scale_type_select.value === 'arithmatic')
+            len = side_length * (1 - w) + (perimeter / sides) * w; // Arithmetic
+        else if(scale_type_select.value === 'geometric')
+            len = side_length ** (1 - w) * (perimeter / sides) ** w; // Geometric
+        else if(scale_type_select.value === 'harmonic')
+            len = ((1 - w) / side_length + w / (perimeter / sides)) ** -1; // Harmonic
         else
             len = sides_length
         let hypot = len / 2 / Math.cos((PI - TWO_PI / (sides)) / 2);
