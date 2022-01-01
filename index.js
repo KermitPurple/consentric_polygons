@@ -125,6 +125,3 @@ function toggle_filling(){
     filling_checkbox.checked = !filling_checkbox.checked;
     redraw();
 }
-
-function update_stroke_weight(){
-}
