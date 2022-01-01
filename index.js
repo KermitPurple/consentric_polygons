@@ -36,7 +36,7 @@ function setup(){
         redraw();
     });
     side_length_slider.addEventListener('input', event=>{
-        side_length = parseInt(side_length_slider.value);
+        side_length = parseFloat(side_length_slider.value);
         perimeter = side_length * 3;
         redraw();
     });
