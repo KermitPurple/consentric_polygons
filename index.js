@@ -83,19 +83,22 @@ function draw_polygon(
     if(sides < 3)
         throw new Error('By definition a polygon must have at least 3 sides');
     let w = parseFloat(relative_scale_slider.value);
+    let v = 1 - w;
+    let len;
+    if(scale_type_select.value === 'pythagorean')
+        len = Math.sqrt(v * side_length ** 2 + w * (perimeter / sides) ** 2); // pythagorean
+    else if(scale_type_select.value === 'arithmatic')
+        len = side_length * v + (perimeter / sides) * w; // Arithmetic
+    else if(scale_type_select.value === 'geometric')
+        len = side_length ** v * (perimeter / sides) ** w; // Geometric
+    else if(scale_type_select.value === 'harmonic')
+        len = (v / side_length + w / (perimeter / sides)) ** -1; // Harmonic
+    else
+        len = sides_length
+    let hypot = len / 2 / Math.cos((PI - TWO_PI / (sides)) / 2);
     beginShape();
     for(let i = 0; i < sides; i++){
         let theta = TWO_PI * i / sides + offset_angle;
-        let len;
-        if(scale_type_select.value === 'arithmatic')
-            len = side_length * (1 - w) + (perimeter / sides) * w; // Arithmetic
-        else if(scale_type_select.value === 'geometric')
-            len = side_length ** (1 - w) * (perimeter / sides) ** w; // Geometric
-        else if(scale_type_select.value === 'harmonic')
-            len = ((1 - w) / side_length + w / (perimeter / sides)) ** -1; // Harmonic
-        else
-            len = sides_length
-        let hypot = len / 2 / Math.cos((PI - TWO_PI / (sides)) / 2);
         vertex(
             center.x + Math.cos(theta) * hypot,
             center.y + Math.sin(theta) * hypot - translation_slider.value * (sides - 3)
