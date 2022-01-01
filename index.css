@@ -26,6 +26,10 @@ body{
     user-select: none; /* Standard */
 }
 
+.dropdown-icon{
+    font-size: 0.8rem;
+}
+
 .dropdown-menu{
     display: none;
 }
@@ -38,6 +42,7 @@ body{
     display: none;
 }
 
+select,
 .slider{
     display: block;
 }
