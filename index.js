@@ -2,8 +2,9 @@ let side_length = 100;
 let center;
 let colors;
 let min_gons = 3;
-let max_gons = 200;
+let max_gons = 500;
 let stroke_weight_slider = document.querySelector("#stroke-weight-slider");
+let side_length_slider = document.querySelector('#side-length-slider');
 let filling_checkbox = document.querySelector("#filling-checkbox");
 
 function setup(){
@@ -26,6 +27,10 @@ function setup(){
     ];
     strokeWeight(stroke_weight_slider.value);
     stroke_weight_slider.addEventListener('change', update_stroke_weight);
+    side_length_slider.addEventListener('change', event=>{
+        side_length = parseInt(side_length_slider.value);
+        redraw();
+    });
     filling_checkbox.addEventListener('change', redraw);
     noLoop();
 }
