@@ -3,10 +3,12 @@ let center;
 let colors;
 let min_gons = 3;
 let max_gons = 200;
-let filling = false;
+let stroke_weight_slider = document.querySelector("#stroke-weight-slider");
+let filling_checkbox = document.querySelector("#filling-checkbox");
 
 function setup(){
     createCanvas(windowWidth, windowHeight);
+    document.getElementsByTagName('canvas')[0].addEventListener('click', toggle_filling);
     center = createVector(windowWidth / 2, windowHeight / 2);
     colors = [
         color(255, 0, 0),
@@ -22,6 +24,9 @@ function setup(){
         color(255, 0, 255),
         color(255, 0, 128)
     ];
+    strokeWeight(stroke_weight_slider.value);
+    stroke_weight_slider.addEventListener('change', update_stroke_weight);
+    filling_checkbox.addEventListener('change', redraw);
     noLoop();
 }
 
@@ -34,7 +39,7 @@ function windowResized(){
 function draw(){
     background(0);
     for(let n = max_gons; n >= min_gons; n--){
-        if(filling){
+        if(filling_checkbox.checked){
             fill(get_color(n - min_gons));
             stroke(0);
         }else{
@@ -52,15 +57,10 @@ function draw(){
 function keyPressed(){
     switch(keyCode){
         case 32:
-            filling = !filling;
-            draw();
+            filling_checkbox.checked = !filling_checkbox.checked;
+            redraw();
             break;
     }
-}
-
-function mouseClicked(){
-    filling = !filling;
-    draw();
 }
 
 function draw_polygon(
@@ -83,4 +83,14 @@ function draw_polygon(
 
 function get_color(index){
     return colors[index % colors.length];
+}
+
+function toggle_filling(){
+    filling_checkbox.checked = !filling_checkbox.checked;
+    redraw();
+}
+
+function update_stroke_weight(){
+    strokeWeight(stroke_weight_slider.value);
+    redraw();
 }
