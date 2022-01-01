@@ -3,9 +3,10 @@ let center;
 let colors;
 let min_gons = 3;
 let max_gons = 500;
-let stroke_weight_slider = document.querySelector("#stroke-weight-slider");
+let stroke_weight_slider = document.querySelector('#stroke-weight-slider');
 let side_length_slider = document.querySelector('#side-length-slider');
-let filling_checkbox = document.querySelector("#filling-checkbox");
+let translation_slider = document.querySelector('#translation-slider');
+let filling_checkbox = document.querySelector('#filling-checkbox');
 
 function setup(){
     createCanvas(windowWidth, windowHeight);
@@ -31,6 +32,7 @@ function setup(){
         side_length = parseInt(side_length_slider.value);
         redraw();
     });
+    translation_slider.addEventListener('change', redraw);
     filling_checkbox.addEventListener('change', redraw);
     noLoop();
 }
@@ -80,7 +82,7 @@ function draw_polygon(
         let theta = TWO_PI * i / sides + offset_angle;
         vertex(
             center.x + Math.cos(theta) * hypot,
-            center.y + Math.sin(theta) * hypot
+            center.y + Math.sin(theta) * hypot - translation_slider.value * (sides - 3)
         );
     }
     endShape(CLOSE);
