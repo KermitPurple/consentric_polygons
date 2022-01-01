@@ -30,16 +30,16 @@ function setup(){
         color(255, 0, 128)
     ];
     strokeWeight(stroke_weight_slider.value);
-    stroke_weight_slider.addEventListener('change', update_stroke_weight);
-    side_length_slider.addEventListener('change', event=>{
+    stroke_weight_slider.addEventListener('input', update_stroke_weight);
+    side_length_slider.addEventListener('input', event=>{
         side_length = parseInt(side_length_slider.value);
         perimeter = side_length * 3;
         redraw();
     });
-    translation_slider.addEventListener('change', redraw);
-    relative_scale_slider.addEventListener('change', redraw);
-    filling_checkbox.addEventListener('change', redraw);
-    scale_type_select.addEventListener('change', redraw);
+    translation_slider.addEventListener('input', redraw);
+    relative_scale_slider.addEventListener('input', redraw);
+    filling_checkbox.addEventListener('input', redraw);
+    scale_type_select.addEventListener('input', redraw);
     noLoop();
 }
 
