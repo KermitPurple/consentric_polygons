@@ -85,9 +85,11 @@ function draw_polygon(
     let w = parseFloat(relative_scale_slider.value);
     let v = 1 - w;
     let len;
-    if(scale_type_select.value === 'pythagorean')
-        len = Math.sqrt(v * side_length ** 2 + w * (perimeter / sides) ** 2); // pythagorean
-    else if(scale_type_select.value === 'arithmatic')
+    if(scale_type_select.value === 'cubic')
+        len = Math.cbrt(v * side_length ** 3 + w * (perimeter / sides) ** 3); // cubic
+    else if(scale_type_select.value === 'quadratic')
+        len = Math.sqrt(v * side_length ** 2 + w * (perimeter / sides) ** 2); // quadratic
+    else if(scale_type_select.value === 'arithmetic')
         len = side_length * v + (perimeter / sides) * w; // Arithmetic
     else if(scale_type_select.value === 'geometric')
         len = side_length ** v * (perimeter / sides) ** w; // Geometric
