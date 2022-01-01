@@ -96,7 +96,7 @@ function draw_polygon(
     else if(scale_type_select.value === 'harmonic')
         len = (v / side_length + w / (perimeter / sides)) ** -1; // Harmonic
     else
-        len = sides_length
+        len = side_length
     let hypot = len / 2 / Math.cos((PI - TWO_PI / (sides)) / 2);
     beginShape();
     for(let i = 0; i < sides; i++){
